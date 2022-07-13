@@ -26,7 +26,7 @@ class UpcomingTask extends StatelessWidget {
               child: ListView(
                 clipBehavior: Clip.antiAlias,
                 shrinkWrap: true,
-                scrollDirection: Axis.vertical,
+                //scrollDirection: Axis.vertical,
                 children: [
                   Container(
                     height: 200,

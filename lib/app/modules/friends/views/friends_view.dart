@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:task_management/app/utils/style/AppColors.dart';
+import 'package:task_management/app/utils/widget/MyFrineds.dart';
 import 'package:task_management/app/utils/widget/Sidebar.dart';
 import '../../../utils/widget/header.dart';
 import '../controllers/friends_controller.dart';
@@ -84,7 +85,9 @@ class FriendsView extends GetView<FriendsController> {
                 //content / isi page / screen
                 Expanded(
                   child: Container(
-                    padding: const EdgeInsets.all(50),
+                    padding: !context.isPhone
+                        ? const EdgeInsets.all(50)
+                        : const EdgeInsets.all(20),
                     margin: !context.isPhone
                         ? const EdgeInsets.all(20)
                         : const EdgeInsets.all(0),
@@ -93,6 +96,67 @@ class FriendsView extends GetView<FriendsController> {
                       borderRadius: !context.isPhone
                           ? BorderRadius.circular(50)
                           : BorderRadius.circular(30),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'People you may know?',
+                          style: TextStyle(
+                              fontSize: 25, color: AppColors.primaryText),
+                        ),
+                        SizedBox(
+                          height: 200,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            shrinkWrap: true,
+                            clipBehavior: Clip.antiAlias,
+                            itemCount: 8,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Stack(
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(50),
+                                      child: const Image(
+                                        image: NetworkImage(
+                                            'https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZmlsZXxlbnwwfHwwfHw%3D&w=1000&q=80'),
+                                      ),
+                                    ),
+                                    Positioned(
+                                      bottom: 10,
+                                      left: 70,
+                                      child: Text(
+                                        'Ryan Nathanael',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ),
+                                    Positioned(
+                                        bottom: 0,
+                                        right: 0,
+                                        child: SizedBox(
+                                          height: 36,
+                                          width: 36,
+                                          child: ElevatedButton(
+                                              onPressed: () {},
+                                              style: ElevatedButton.styleFrom(
+                                                padding: EdgeInsets.zero,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(50),
+                                                ),
+                                              ),
+                                              child: Icon(Ionicons.add_circle)),
+                                        ))
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        MyFriends()
+                      ],
                     ),
                   ),
                 ),
